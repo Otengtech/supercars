@@ -20,13 +20,13 @@ function Home() {
   return (
     <>
       {/* Navbar */}
-      <nav className="bg-gray-900/80 backdrop-blur-sm border-b border-gray-700/50 sticky top-0 z-50">
+      <nav className="bg-gray-900/80 backdrop-blur-sm border-b border-gray-700/50 z-50">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-red-500 rounded-lg"></div>
-              <span className="text-white font-bold text-xl">AutoWall</span>
+              <span className="text-white font-bold text-xl">HYPERCARS</span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -48,7 +48,7 @@ function Home() {
             {/* Search Bar - Desktop */}
             <div className="hidden md:flex items-center space-x-4">
               <div className="relative">
-                <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+                <Search className="w-4 h-4 text-gray-400 absolute left-3 z-30 top-1/2 transform -translate-y-1/2" />
                 <input
                   type="text"
                   placeholder="Search cars..."
@@ -125,7 +125,7 @@ function Home() {
         {/* Search and Filter Header */}
         <div className="flex flex-col lg:flex-row gap-4 mb-8">
           {/* Search Bar - Mobile visible on desktop too for consistency */}
-          <div className="flex-1">
+          {/* <div className="flex-1">
             <div className="relative max-w-md">
               <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
               <input
@@ -144,22 +144,21 @@ function Home() {
                 </button>
               )}
             </div>
-          </div>
+          </div> */}
 
           {/* Category Filter */}
-          <div className="flex items-center gap-4">
+          <div className="flex justify-center items-center gap-4">
             <Filter className="w-5 h-5 text-gray-400" />
             <div className="flex flex-wrap gap-2">
-              <button
+              {/* <button
                 onClick={() => setSelectedCategory('All')}
                 className={`px-4 py-2 rounded-lg border transition-all duration-300 backdrop-blur-sm ${
                   selectedCategory === 'All'
                     ? 'bg-red-500/20 border-red-500/50 text-red-400'
                     : 'bg-gray-800/30 border-gray-700/50 text-gray-300 hover:border-gray-600/70 hover:text-white'
                 }`}
-              >
-                All
-              </button>
+              > */}
+              {/* </button> */}
               {categories.map((category) => (
                 <button
                   key={category}
