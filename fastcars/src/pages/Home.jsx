@@ -201,7 +201,7 @@ function CarCard({ car }) {
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
         
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-70 group-hover:opacity-60 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent opacity-70 group-hover:opacity-60 transition-opacity duration-300" />
         
         <div className="absolute top-3 right-3 bg-black/80 backdrop-blur-sm rounded-full px-3 py-1 text-sm text-white border border-white/20">
           {car.wallpapers} wallpapers
@@ -212,18 +212,15 @@ function CarCard({ car }) {
         </div>
         
         <div className="absolute bottom-0 left-0 right-0 p-4">
-          <p className="text-gray-300 text-sm font-medium mb-1 opacity-90">
-            {car.brand}
-          </p>
           
-          <h3 className="font-bold text-xl text-white mb-3 group-hover:text-red-400 transition-colors duration-300">
+          <h3 className="font-bold text-xl text-white mb-3 transition-colors duration-300">
             {car.name}
           </h3>
           
           {/* Updated Button with Link */}
           <Link 
             to={`/car/${car.id}`}
-            className="w-full bg-black/50 text-orange-500 py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 group/btn backdrop-blur-sm border border-white/20 hover:bg-black/70 hover:border-orange-500/50"
+            className="w-full bg-black/50 text-orange-500 py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 group/btn backdrop-blur-sm border border-white/20 hover:bg-black/50 hover:border-orange-100/50"
           >
             <Download className="w-4 h-4" />
             View Wallpapers
