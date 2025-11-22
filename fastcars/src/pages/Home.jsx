@@ -28,22 +28,6 @@ function Home() {
               <span className="text-white font-bold text-xl">HYPERCARS</span>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              <Link to="/" className="text-white hover:text-red-400 transition-colors duration-300">
-                Home
-              </Link>
-              <Link to="/categories" className="text-gray-300 hover:text-white transition-colors duration-300">
-                Categories
-              </Link>
-              <Link to="/popular" className="text-gray-300 hover:text-white transition-colors duration-300">
-                Popular
-              </Link>
-              <Link to="/about" className="text-gray-300 hover:text-white transition-colors duration-300">
-                About
-              </Link>
-            </div>
-
             {/* Search Bar - Desktop */}
             <div className="hidden md:flex items-center space-x-4">
               <div className="relative">
@@ -77,27 +61,6 @@ function Home() {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Home
-                </Link>
-                <Link 
-                  to="/categories" 
-                  className="text-gray-300 hover:text-white transition-colors duration-300"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Categories
-                </Link>
-                <Link 
-                  to="/popular" 
-                  className="text-gray-300 hover:text-white transition-colors duration-300"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Popular
-                </Link>
-                <Link 
-                  to="/about" 
-                  className="text-gray-300 hover:text-white transition-colors duration-300"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  About
                 </Link>
                 
                 {/* Mobile Search */}
