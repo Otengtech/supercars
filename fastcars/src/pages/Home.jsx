@@ -2,12 +2,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { cars, categories } from '../data/cars';
-import { Search, Filter, Download, ChevronRight } from 'lucide-react';
+import { Search, Filter, Download, ChevronRight, Menu, X } from 'lucide-react';
 import HeroSection from '../components/HeroSection';
 
 function Home() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const filteredCars = cars.filter(car => {
     const matchesCategory = selectedCategory === 'All' || car.category === selectedCategory.toLowerCase();
@@ -18,18 +19,211 @@ function Home() {
 
   return (
     <>
+      {/* Navbar */}
+      <nav className="bg-gray-900/80 backdrop-blur-sm border-b border-gray-700/50 sticky top-0 z-50">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <Link to="/" className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-red-500 rounded-lg"></div>
+              <span className="text-white font-bold text-xl">AutoWall</span>
+            </Link>
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
+              <Link to="/" className="text-white hover:text-red-400 transition-colors duration-300">
+                Home
+              </Link>
+              <Link to="/categories" className="text-gray-300 hover:text-white transition-colors duration-300">
+                Categories
+              </Link>
+              <Link to="/popular" className="text-gray-300 hover:text-white transition-colors duration-300">
+                Popular
+              </Link>
+              <Link to="/about" className="text-gray-300 hover:text-white transition-colors duration-300">
+                About
+              </Link>
+            </div>
+
+            {/* Search Bar - Desktop */}
+            <div className="hidden md:flex items-center space-x-4">
+              <div className="relative">
+                <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+                <input
+                  type="text"
+                  placeholder="Search cars..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="bg-gray-800/50 border border-gray-600/50 rounded-lg pl-10 pr-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:border-red-500/50 focus:bg-gray-800/70 transition-all duration-300 w-64"
+                />
+              </div>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden text-gray-300 hover:text-white transition-colors duration-300"
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+
+          {/* Mobile Menu */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden py-4 border-t border-gray-700/50">
+              <div className="flex flex-col space-y-4">
+                <Link 
+                  to="/" 
+                  className="text-white hover:text-red-400 transition-colors duration-300"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Home
+                </Link>
+                <Link 
+                  to="/categories" 
+                  className="text-gray-300 hover:text-white transition-colors duration-300"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Categories
+                </Link>
+                <Link 
+                  to="/popular" 
+                  className="text-gray-300 hover:text-white transition-colors duration-300"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Popular
+                </Link>
+                <Link 
+                  to="/about" 
+                  className="text-gray-300 hover:text-white transition-colors duration-300"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  About
+                </Link>
+                
+                {/* Mobile Search */}
+                <div className="relative pt-2">
+                  <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+                  <input
+                    type="text"
+                    placeholder="Search cars..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="bg-gray-800/50 border border-gray-600/50 rounded-lg pl-10 pr-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:border-red-500/50 focus:bg-gray-800/70 transition-all duration-300 w-full"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </nav>
+
       <HeroSection />
       
       {/* Category Filter Section */}
       <div className="container mx-auto px-4 py-6">
-        {/* ... your existing filter code ... */}
-        
-        {/* Cars Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filteredCars.map((car) => (
-            <CarCard key={car.id} car={car} />
-          ))}
+        {/* Search and Filter Header */}
+        <div className="flex flex-col lg:flex-row gap-4 mb-8">
+          {/* Search Bar - Mobile visible on desktop too for consistency */}
+          <div className="flex-1">
+            <div className="relative max-w-md">
+              <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+              <input
+                type="text"
+                placeholder="Search by car name or brand..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="bg-gray-800/30 border border-gray-700/50 rounded-xl pl-10 pr-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-red-500/50 focus:bg-gray-800/50 transition-all duration-300 w-full backdrop-blur-sm"
+              />
+              {searchTerm && (
+                <button
+                  onClick={() => setSearchTerm('')}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors duration-300"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Category Filter */}
+          <div className="flex items-center gap-4">
+            <Filter className="w-5 h-5 text-gray-400" />
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={() => setSelectedCategory('All')}
+                className={`px-4 py-2 rounded-lg border transition-all duration-300 backdrop-blur-sm ${
+                  selectedCategory === 'All'
+                    ? 'bg-red-500/20 border-red-500/50 text-red-400'
+                    : 'bg-gray-800/30 border-gray-700/50 text-gray-300 hover:border-gray-600/70 hover:text-white'
+                }`}
+              >
+                All
+              </button>
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-4 py-2 rounded-lg border transition-all duration-300 backdrop-blur-sm capitalize ${
+                    selectedCategory === category
+                      ? 'bg-red-500/20 border-red-500/50 text-red-400'
+                      : 'bg-gray-800/30 border-gray-700/50 text-gray-300 hover:border-gray-600/70 hover:text-white'
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
+
+        {/* Results Count */}
+        <div className="flex items-center justify-between mb-6">
+          <p className="text-gray-400">
+            Showing {filteredCars.length} of {cars.length} cars
+            {selectedCategory !== 'All' && ` in ${selectedCategory}`}
+            {searchTerm && ` matching "${searchTerm}"`}
+          </p>
+          
+          {/* Sort Options (Optional) */}
+          <select className="bg-gray-800/30 border border-gray-700/50 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-red-500/50 backdrop-blur-sm">
+            <option value="name">Sort by Name</option>
+            <option value="brand">Sort by Brand</option>
+            <option value="wallpapers">Most Wallpapers</option>
+          </select>
+        </div>
+
+        {/* Cars Grid */}
+        {filteredCars.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filteredCars.map((car) => (
+              <CarCard key={car.id} car={car} />
+            ))}
+          </div>
+        ) : (
+          /* No Results State */
+          <div className="text-center py-16">
+            <div className="w-24 h-24 bg-gray-800/30 rounded-full flex items-center justify-center mx-auto mb-6 border border-gray-700/50">
+              <Search className="w-8 h-8 text-gray-500" />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-2">No cars found</h3>
+            <p className="text-gray-400 mb-6">
+              {searchTerm 
+                ? `No results found for "${searchTerm}"${selectedCategory !== 'All' ? ` in ${selectedCategory}` : ''}`
+                : `No cars available${selectedCategory !== 'All' ? ` in ${selectedCategory}` : ''}`
+              }
+            </p>
+            <button
+              onClick={() => {
+                setSearchTerm('');
+                setSelectedCategory('All');
+              }}
+              className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg transition-colors duration-300"
+            >
+              Clear Filters
+            </button>
+          </div>
+        )}
       </div>
     </>
   );
