@@ -25,7 +25,6 @@ function Home() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-red-500 rounded-lg"></div>
               <span className="text-white font-bold text-xl">HYPERCARS</span>
             </Link>
 
@@ -70,7 +69,7 @@ function Home() {
 
           {/* Mobile Menu */}
           {isMobileMenuOpen && (
-            <div className="md:hidden py-4 border-t border-gray-700/50">
+            <div className="md:hidden py-4">
               <div className="flex flex-col space-y-4">
                 <Link 
                   to="/" 
