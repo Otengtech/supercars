@@ -76,12 +76,12 @@ const Navbar = () => {
                 className="h-7 w-7 text-[#475BFD]"
               />
 
-              <span className="text-xl font-bold">AXIS</span>
+              <span className="text-xl font-bold text-gray-400">AXIS</span>
             </div>
 
             <button
               onClick={toggleMobileMenu}
-              className="p-2 rounded-lg hover:bg-gray-800 transition-colors duration-200"
+              className="p-2 rounded-lg hover:bg-gray-800 text-gray-400 transition-colors duration-200"
             >
               <FontAwesomeIcon icon={faTimes} className="h-5 w-5" />
             </button>
@@ -101,7 +101,7 @@ const Navbar = () => {
                     icon={item.icon}
                     className="h-5 w-5 mr-3 text-gray-400 group-hover:text-[#475BFD]"
                   />
-                  <span className="font-medium">{item.name}</span>
+                  <span className="font-medium text-gray-400">{item.name}</span>
                 </a>
               ))}
             </nav>
@@ -191,7 +191,7 @@ const Navbar = () => {
                 <input
                   type="text"
                   placeholder="Search for games..."
-                  className="w-full bg-gray-900 text-white pl-10 pr-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#475BFD]"
+                  className="w-full bg-gray-900 text-white pl-10 pr-4 py-3 rounded-full focus:outline-none focus:ring-2 focus:ring-[#475BFD]"
                 />
                 <FontAwesomeIcon
                   icon={faSearch}
