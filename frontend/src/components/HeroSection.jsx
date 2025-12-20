@@ -190,38 +190,41 @@ const HeroSection = () => {
               {currentGame.description}
             </p>
 
-            {/* Game Details - Responsive layout */}
-            <div className="grid grid-cols-3 xs:grid-cols-3 sm:flex sm:flex-wrap gap-3 sm:gap-4 md:gap-6">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-lg bg-gradient-to-br from-[#475BFD] to-purple-600 flex items-center justify-center flex-shrink-0">
-                  <FontAwesomeIcon icon={faStar} className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-white" />
-                </div>
-                <div>
-                  <p className="text-xs sm:text-sm text-gray-400">Rating</p>
-                  <p className="text-sm sm:text-base md:text-lg font-bold text-white">{currentGame.rating}/5.0</p>
-                </div>
-              </div>
+            {/* Game Details - Responsive 3-column grid on ALL screens */}
+<div className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+  {/* Rating */}
+  <div className="flex items-center space-x-2">
+    <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-lg bg-gradient-to-br from-[#475BFD] to-purple-600 flex items-center justify-center flex-shrink-0">
+      <FontAwesomeIcon icon={faStar} className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-white" />
+    </div>
+    <div>
+      <p className="text-xs sm:text-sm text-gray-400">Rating</p>
+      <p className="text-sm sm:text-base md:text-lg font-bold text-white">{currentGame.rating}/5.0</p>
+    </div>
+  </div>
 
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-600 flex items-center justify-center flex-shrink-0">
-                  <FontAwesomeIcon icon={faCalendar} className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-white" />
-                </div>
-                <div>
-                  <p className="text-xs sm:text-sm text-gray-400">Released</p>
-                  <p className="text-sm sm:text-base md:text-lg font-bold text-white">{currentGame.releaseYear}</p>
-                </div>
-              </div>
+  {/* Released */}
+  <div className="flex items-center space-x-2">
+    <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-600 flex items-center justify-center flex-shrink-0">
+      <FontAwesomeIcon icon={faCalendar} className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-white" />
+    </div>
+    <div>
+      <p className="text-xs sm:text-sm text-gray-400">Released</p>
+      <p className="text-sm sm:text-base md:text-lg font-bold text-white">{currentGame.releaseYear}</p>
+    </div>
+  </div>
 
-              <div className="flex items-center space-x-2 col-span-2 xs:col-span-1 justify-center xs:justify-start">
-                <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-lg bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center flex-shrink-0">
-                  <FontAwesomeIcon icon={faGamepad} className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-white" />
-                </div>
-                <div>
-                  <p className="text-xs sm:text-sm text-gray-400">Genre</p>
-                  <p className="text-sm sm:text-base md:text-lg font-bold text-white truncate max-w-[100px] sm:max-w-none">{currentGame.genre}</p>
-                </div>
-              </div>
-            </div>
+  {/* Genre */}
+  <div className="flex items-center space-x-2">
+    <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-lg bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center flex-shrink-0">
+      <FontAwesomeIcon icon={faGamepad} className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-white" />
+    </div>
+    <div>
+      <p className="text-xs sm:text-sm text-gray-400">Genre</p>
+      <p className="text-sm sm:text-base md:text-lg font-bold text-white truncate max-w-[100px] sm:max-w-none">{currentGame.genre}</p>
+    </div>
+  </div>
+</div>
 
             {/* Platforms - Responsive */}
             <div className="space-y-2 sm:space-y-3">
