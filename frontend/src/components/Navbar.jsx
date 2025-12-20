@@ -12,6 +12,7 @@ import {
   faUser,
   faBell,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -39,11 +40,11 @@ const Navbar = () => {
     { name: "Trending", icon: faFire, path: "/trending" },
     { name: "New Releases", icon: faCalendar, path: "/new-releases" },
     { name: "Top Rated", icon: faStar, path: "/top-rated" },
+    { name: "All Games", icon: faGamepad, path: "/all-games" },
   ];
 
   const mobileMenuItems = [
     ...navItems,
-    { name: "Games", icon: faGamepad, path: "/all-games" },
   ];
 
   return (
@@ -68,14 +69,14 @@ const Navbar = () => {
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-gray-800">
-            <div className="flex items-center space-x-3">
+            <Link to="/" className="flex items-center space-x-3">
               <FontAwesomeIcon
                 icon={faGamepad}
                 className="h-7 w-7 text-[#475BFD]"
               />
 
               <span className="text-xl font-bold text-gray-400">PLAYAXIS</span>
-            </div>
+            </Link>
 
             <button
               onClick={toggleMobileMenu}
@@ -89,18 +90,18 @@ const Navbar = () => {
           <div className="flex-1 overflow-y-auto py-4">
             <nav className="px-4 space-y-1">
               {mobileMenuItems.map((item) => (
-                <a
+                <Link
                   key={item.name}
-                  href={item.path}
+                  to={item.path}
                   onClick={toggleMobileMenu}
-                  className="flex items-center px-4 py-3 rounded-lg hover:bg-gray-800 hover:text-[#475BFD] transition-colors duration-200 group"
+                  className="flex items-center px-4 py-3 cursor-pointer rounded-lg hover:bg-gray-800 hover:text-[#475BFD] transition-colors duration-200 group"
                 >
                   <FontAwesomeIcon
                     icon={item.icon}
                     className="h-5 w-5 mr-3 text-gray-400 group-hover:text-[#475BFD]"
                   />
                   <span className="font-medium text-gray-400">{item.name}</span>
-                </a>
+                </Link>
               ))}
             </nav>
           </div>

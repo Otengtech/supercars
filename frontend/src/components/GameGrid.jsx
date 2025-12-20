@@ -5,7 +5,9 @@ const AboutPage = () => {
   const titleRef = useScrollReveal();
   const titleDesRef = useScrollReveal();
   const leftRef = useScrollReveal();
+  const left1Ref = useScrollReveal();
   const rightRef = useScrollReveal();
+  const right2Ref = useScrollReveal();
 
   return (
     <section className="min-h-screen bg-gradient-to-b from-[#0d1117] via-black to-[#0d1117] py-20">
@@ -27,12 +29,12 @@ const AboutPage = () => {
             ref={leftRef}
             className="scroll-reveal from-bottom slow-dramatic opacity-0 translate-y-10 transition-all duration-700 ease-out"
           >
-            <div className="bg-gradient-to-br from-gray-900/50 to-gray-900/30 rounded-2xl p-8 border border-gray-800 hover:border-[#475BFD]/30 transition-colors duration-300">
-              <h2 className="text-3xl font-bold text-white mb-6">Our Story</h2>
+            <div ref={left1Ref} className="scroll-reveal from-bottom slow-dramatic">
+              <h2 className=" text-3xl font-bold text-white mb-6">Our Story</h2>
               <p className="text-gray-300 text-lg leading-relaxed">
-                Founded in 2023 by a team of passionate gamers and developers, 
-                we noticed how difficult it was to track new releases and find 
-                quality games. That's why we built GameVerse - a comprehensive 
+                Founded in 2025 by a University student in ( KTU ) Ghana, 
+                I noticed how difficult it was to track new releases and find 
+                quality games. That's why I built Play Axis - a comprehensive 
                 platform that makes game discovery effortless.
               </p>
             </div>
@@ -43,7 +45,7 @@ const AboutPage = () => {
             ref={rightRef}
             className="scroll-reveal from-bottom slow-dramatic opacity-0 translate-y-10 transition-all duration-700 ease-out delay-300"
           >
-            <div className="bg-gradient-to-br from-gray-900/50 to-gray-900/30 rounded-2xl p-8 border border-gray-800 hover:border-purple-600/30 transition-colors duration-300">
+            <div ref={right2Ref} className="scroll-reveal from-bottom slow-dramatic">
               <h2 className="text-3xl font-bold text-white mb-6">Our Values</h2>
               <ul className="space-y-4">
                 <li className="flex items-center">
