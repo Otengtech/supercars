@@ -105,8 +105,8 @@ const TrendingGames = () => {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#475BFD]/20 border border-[#475BFD]/40 mb-4">
-            <span ref={titleRef} className="scroll-reveal from-bottom slow-dramatic text-sm font-bold text-[#475BFD]">TRENDING NOW</span>
+          <div ref={titleRef} className="scroll-reveal from-bottom slow-dramatic inline-flex items-center px-4 py-2 rounded-full bg-[#475BFD]/20 border border-[#475BFD]/40 mb-4">
+            <span className=" text-sm font-bold text-[#475BFD]">TRENDING NOW</span>
           </div>
           <h2 ref={titleDesRef} className="scroll-reveal from-bottom slow-dramatic text-3xl md:text-4xl font-bold text-white mb-4">
             Hot Games Right Now

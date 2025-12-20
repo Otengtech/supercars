@@ -282,22 +282,6 @@ img {
 }
 
 /* Mobile adjustments */
-@media (max-width: 768px) {
-  .scroll-reveal.from-left,
-  .scroll-reveal.from-right {
-    transform: translateX(-50px); /* Increased from 20px */
-  }
-  
-  .scroll-reveal.from-bottom {
-    transform: translateY(50px); /* Increased from 20px */
-  }
-  
-  /* Slower on mobile for better UX */
-  .scroll-reveal.visible {
-    transition: opacity 1.2s ease-out,
-                transform 1.4s cubic-bezier(0.19, 1, 0.22, 1);
-  }
-}
 
 /* === ANIMATION PRESETS === */
 /* Slow & dramatic */
