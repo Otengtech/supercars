@@ -74,7 +74,7 @@ const Navbar = () => {
                 className="h-7 w-7 text-[#475BFD]"
               />
 
-              <span className="text-xl font-bold text-gray-400">AXIS</span>
+              <span className="text-xl font-bold text-gray-400">PLAYAXIS</span>
             </div>
 
             <button
@@ -128,7 +128,7 @@ const Navbar = () => {
               <div className="flex items-center space-x-3">
                 <FontAwesomeIcon icon={faGamepad} className="text-lg" />
 
-                <span className="text-xl font-bold">AXIS</span>
+                <span className="text-xl font-bold">PLAYAXIS</span>
               </div>
             </div>
 

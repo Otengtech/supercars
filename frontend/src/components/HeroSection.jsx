@@ -282,7 +282,7 @@ const HeroSection = () => {
                 />
               </button>
               
-              <button className="px-4 py-2 xs:px-5 xs:py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-3 bg-gradient-to-r from-[#475BFD] to-purple-600 text-white rounded-lg sm:rounded-xl font-bold flex items-center justify-center hover:from-purple-600 hover:to-[#475BFD] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-sm xs:text-base sm:text-lg min-w-[120px] xs:min-w-[140px] sm:min-w-[160px]">
+              <button className="px-4 py-2 xs:px-5 xs:py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-lg sm:rounded-xl font-bold flex items-center justify-center hover:from-purple-600 hover:to-[#475BFD] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-sm xs:text-base sm:text-lg min-w-[120px] xs:min-w-[140px] sm:min-w-[160px]">
                 <span>PLAYAXIS</span>
               </button>
 

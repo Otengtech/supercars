@@ -1,12 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faGamepad, faCalendar } from '@fortawesome/free-solid-svg-icons';
+import { useScrollReveal } from '../hooks/useIntersectionObserver';
 
 const TrendingGames = () => {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const sliderRef = useRef(null);
+    const titleRef = useScrollReveal();
+    const titleDesRef = useScrollReveal();
+    const leftRef = useScrollReveal();
+    const rightRef = useScrollReveal();
 
   // IMPORTANT: This reads from your .env file
   const API_URL = import.meta.env.VITE_API_URL + '/api/trending-games';
@@ -101,7 +106,7 @@ const TrendingGames = () => {
         {/* Section Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#475BFD]/20 border border-[#475BFD]/40 mb-4">
-            <span className="text-sm font-bold text-[#475BFD]">🔥 TRENDING NOW</span>
+            <span ref={titleRef} className="scroll-reveal text-sm font-bold text-[#475BFD]">TRENDING NOW</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Hot Games Right Now
@@ -207,8 +212,8 @@ const TrendingGames = () => {
 
         {/* View All Button */}
         <div className="text-center mt-12">
-          <button className="px-8 py-3 bg-gradient-to-r from-[#475BFD] to-purple-600 text-white rounded-xl font-bold hover:from-purple-600 hover:to-[#475BFD] transition-all duration-300 transform hover:scale-105 shadow-lg">
-            View All Trending Games
+          <button className="px-6 py-3 bg-gradient-to-r from-[#475BFD] to-purple-600 text-white rounded-full font-bold hover:from-purple-600 hover:to-[#475BFD] transition-all duration-300 transform hover:scale-105 shadow-lg">
+            Trending Games
           </button>
         </div>
       </div>
