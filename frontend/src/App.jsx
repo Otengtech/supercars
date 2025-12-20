@@ -9,7 +9,7 @@ import Home from './pages/Home';
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
+      <div className="min-h-screen bg-black text-white">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/car/:id" element={<CarDetail cars={cars} categories={categories}/>} />
