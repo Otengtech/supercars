@@ -126,7 +126,7 @@ const TrendingGames = () => {
         </div>
 
         {/* Games Slider */}
-        <div className="relative overflow-hidden">
+        <div ref={leftRef} className="scroll-reveal from-bottom slow-dramatic relative overflow-hidden">
           {games.length > 0 ? (
             <>
               <div ref={sliderRef} className="flex gap-6">
