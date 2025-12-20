@@ -131,7 +131,7 @@ const TrendingGames = () => {
           </p>
         </div>
 
-        {/* Infinite Sliding Container. */}
+        {/* Infinite Sliding Container */}
         <div className="relative overflow-hidden">
           <div 
             ref={sliderRef}
