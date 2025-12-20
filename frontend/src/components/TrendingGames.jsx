@@ -13,7 +13,8 @@ const TrendingGames = () => {
   const subtitleRef = useScrollReveal();
 
   // Use local backend for now since supercars-g0du.onrender.com is down
-    const API_URL = import.meta.env.VITE_API_URL;
+  const BASE_URL = import.meta.env.VITE_API_URL;
+    const API_URL = `${BASE_URL}/api/trending-games`;
 
   useEffect(() => {
     const fetchTrendingGames = async () => {
