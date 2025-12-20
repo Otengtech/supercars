@@ -1,18 +1,16 @@
 // src/App.jsx
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { cars, categories } from './data/cars';
-import { Search, Filter } from 'lucide-react';
-import CarDetail from './pages/CarDetail';
+import React from 'react';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <Router>
+      <Navbar />
       <div className="min-h-screen bg-black text-white">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/car/:id" element={<CarDetail cars={cars} categories={categories}/>} />
         </Routes>
       </div>
     </Router>
