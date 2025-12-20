@@ -1,84 +1,91 @@
-const express = require('express');
-const cors = require('cors');
-const axios = require('axios');
-require('dotenv').config();
+import express from 'express';
+import cors from 'cors';
+import axios from 'axios';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 
-// CORS configuration for both dev and prod
-const allowedOrigins = [
-  'http://localhost:3000',
-  'https://playaxis.vercel.app'
-];
+// ENV validation
+const RAWG_API_KEY = process.env.RAWG_API_KEY;
+const PORT = process.env.PORT || 5000;
 
+if (!RAWG_API_KEY) {
+  console.error('❌ FATAL ERROR: RAWG_API_KEY is not set');
+  console.error('👉 Get a key from https://rawg.io/apidocs');
+  process.exit(1);
+}
+
+console.log('✅ Backend configuration:');
+console.log(`   - Port: ${PORT}`);
+console.log(`   - API Key: ${RAWG_API_KEY.slice(0, 8)}...`);
+
+// CORS
 app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = `The CORS policy for this site does not allow access from the specified Origin: ${origin}`;
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:3000',
+    'https://playaxis.vercel.app'
+  ],
   credentials: true
 }));
 
 app.use(express.json());
 
-// Trending games endpoint
-app.get('/api/trending-games', async (req, res) => {
-  try {
-    // Using RAWG API (get your free API key from https://rawg.io/apidocs)
-    const apiKey = process.env.RAWG_API_KEY;
-
-if (!apiKey) {
-  return res.status(500).json({
-    success: false,
-    error: 'RAWG_API_KEY is missing on the server'
+// Health check
+app.get('/api/health', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Backend is running',
+    timestamp: new Date().toISOString()
   });
-}
-    
-    // Fetch trending games
-    const response = await axios.get(`https://api.rawg.io/api/games`, {
+});
+
+// Trending games — REAL DATA ONLY
+app.get('/api/trending-games', async (req, res) => {
+  console.log('📡 Fetching trending games from RAWG...');
+
+  try {
+    const { data } = await axios.get('https://api.rawg.io/api/games', {
       params: {
-        key: apiKey,
-        dates: '2023-01-01,2024-12-31',
+        key: RAWG_API_KEY,
         ordering: '-added',
-        page_size: 10
-      }
+        page_size: 12
+      },
+      timeout: 10000
     });
 
-    // Format the response
-    const trendingGames = response.data.results.map(game => ({
+    const games = data.results.map(game => ({
       id: game.id,
       name: game.name,
       background_image: game.background_image,
       rating: game.rating,
       released: game.released,
-      genres: game.genres.map(g => g.name),
-      platforms: game.platforms.map(p => p.platform.name),
-      clip: game.clip?.clips?.full || null
+      genres: game.genres?.map(g => g.name).slice(0, 3) ?? [],
+      platforms: game.platforms?.map(p => p.platform.name).slice(0, 3) ?? []
     }));
+
+    console.log(`✅ Fetched ${games.length} games`);
 
     res.json({
       success: true,
-      count: trendingGames.length,
-      games: trendingGames
+      count: games.length,
+      games
     });
 
   } catch (error) {
-    console.error('Error fetching trending games:', error.message);
+    console.error('❌ RAWG API error:', error.response?.data || error.message);
+
+    // ❗ IMPORTANT: fail loudly — no mock data in prod
     res.status(500).json({
       success: false,
-      error: 'Failed to fetch trending games',
-      message: error.message
+      error: 'Failed to fetch games from RAWG'
     });
   }
 });
 
-const PORT = process.env.PORT || 5000;
+// Start server
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
