@@ -191,7 +191,7 @@ const HeroSection = () => {
             </p>
 
             {/* Game Details - Responsive layout */}
-            <div className="grid grid-cols-2 xs:grid-cols-3 sm:flex sm:flex-wrap gap-3 sm:gap-4 md:gap-6">
+            <div className="grid grid-cols-3 xs:grid-cols-3 sm:flex sm:flex-wrap gap-3 sm:gap-4 md:gap-6">
               <div className="flex items-center space-x-2">
                 <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-lg bg-gradient-to-br from-[#475BFD] to-purple-600 flex items-center justify-center flex-shrink-0">
                   <FontAwesomeIcon icon={faStar} className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-white" />
@@ -312,30 +312,6 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-
-      {/* Mobile Touch Swipe Area */}
-      <div 
-        className="absolute inset-0 lg:hidden z-20"
-        onTouchStart={(e) => {
-          const touchDownX = e.touches[0].clientX;
-          const handleTouchEnd = (e) => {
-            const touchUpX = e.changedTouches[0].clientX;
-            const diff = touchDownX - touchUpX;
-            
-            if (Math.abs(diff) > 50) { // Minimum swipe distance
-              if (diff > 0) {
-                nextSlide(); // Swipe left
-              } else {
-                prevSlide(); // Swipe right
-              }
-            }
-            
-            document.removeEventListener('touchend', handleTouchEnd);
-          };
-          
-          document.addEventListener('touchend', handleTouchEnd);
-        }}
-      />
 
       {/* Bottom Gradient - Responsive height */}
       <div className="absolute bottom-0 left-0 right-0 h-16 sm:h-24 md:h-32 bg-gradient-to-t from-[#0d1117] to-transparent" />

@@ -43,9 +43,7 @@ const Navbar = () => {
 
   const mobileMenuItems = [
     ...navItems,
-    { name: "My Profile", icon: faUser, path: "/profile" },
-    { name: "My Games", icon: faGamepad, path: "/library" },
-    { name: "Notifications", icon: faBell, path: "/notifications" },
+    { name: "Games", icon: faGamepad, path: "/all-games" },
   ];
 
   return (
