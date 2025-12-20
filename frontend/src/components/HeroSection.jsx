@@ -152,8 +152,8 @@ const HeroSection = () => {
               className="w-full h-full object-cover"
             />
             {/* Gradient Overlay - Responsive intensity */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 to-transparent md:from-black/90 md:via-black/70" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/80 to-transparent md:from-black/90 md:via-black/70" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
           </div>
         ))}
       </div>
@@ -240,9 +240,9 @@ const HeroSection = () => {
           </div>
 
           {/* Right Content - Navigation Controls */}
-          <div className="relative order-1 lg:order-2 mb-6 sm:mb-8 lg:mb-0">
+          <div className="relative z-30 mb-6 sm:mb-8 lg:mb-0">
             {/* Game Thumbnails - Hide on very small screens, show horizontally on others */}
-            <div className="flex justify-center space-x-2 sm:space-x-3 md:space-x-4 mb-4 sm:mb-6 md:mb-8 overflow-x-auto pb-2 sm:pb-0">
+            <div className="flex justify-center z-30 space-x-2 sm:space-x-3 md:space-x-4 mb-4 sm:mb-6 md:mb-8 overflow-x-auto pb-2 sm:pb-0">
               {games.map((game, index) => (
                 <button
                   key={game.id}
