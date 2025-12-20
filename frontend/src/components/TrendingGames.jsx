@@ -12,16 +12,15 @@ const TrendingGames = () => {
   const titleRef = useScrollReveal();
   const subtitleRef = useScrollReveal();
 
-  // For production: https://supercars-g0du.onrender.com/api/trending-games
-  // For development: http://localhost:5000/api/trending-games
-  const API_URL = process.env.NODE_ENV === 'production' 
-    ? 'https://supercars-g0du.onrender.com/api/trending-games'
-    : 'http://localhost:5000/api/trending-games';
+  // Use local backend for now since supercars-g0du.onrender.com is down
+  const API_URL = 'http://localhost:5000/api/trending-games';
 
   useEffect(() => {
     const fetchTrendingGames = async () => {
       try {
         setLoading(true);
+        console.log('Fetching from:', API_URL);
+        
         const response = await fetch(API_URL);
         
         if (!response.ok) {
@@ -29,46 +28,88 @@ const TrendingGames = () => {
         }
         
         const data = await response.json();
+        console.log('Data received:', data);
         
-        if (data.success) {
+        if (data.success && data.games && data.games.length > 0) {
           setGames(data.games);
+          setError(null);
         } else {
-          // Try fallback endpoint if main fails
-          await fetchFallbackGames();
+          throw new Error('No games data received');
         }
       } catch (err) {
         console.error('Error fetching trending games:', err);
         setError(err.message);
-        // Try fallback as last resort
-        await fetchFallbackGames();
+        // Use hardcoded fallback data
+        useHardcodedData();
       } finally {
         setLoading(false);
       }
     };
 
-    const fetchFallbackGames = async () => {
-      try {
-        const fallbackUrl = API_URL.replace('/trending-games', '/trending-games/fallback');
-        const response = await fetch(fallbackUrl);
-        const data = await response.json();
-        setGames(data.games);
-      } catch (fallbackErr) {
-        console.error('Fallback also failed:', fallbackErr);
-        setError('Failed to load trending games. Please try again later.');
-      }
+    const useHardcodedData = () => {
+      console.log('Using hardcoded fallback data');
+      const fallbackGames = [
+        {
+          id: 1,
+          name: "Cyberpunk 2077",
+          background_image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&auto=format&fit=crop",
+          rating: 4.5,
+          released: "2020-12-10",
+          genres: ["RPG", "Action"],
+          platforms: ["PC", "PS5", "Xbox"]
+        },
+        {
+          id: 2,
+          name: "Baldur's Gate 3",
+          background_image: "https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?w=800&auto=format&fit=crop",
+          rating: 4.8,
+          released: "2023-08-03",
+          genres: ["RPG", "Adventure"],
+          platforms: ["PC", "PS5"]
+        },
+        {
+          id: 3,
+          name: "Elden Ring",
+          background_image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&auto=format&fit=crop",
+          rating: 4.7,
+          released: "2022-02-25",
+          genres: ["RPG", "Action"],
+          platforms: ["PC", "PS5", "Xbox"]
+        },
+        {
+          id: 4,
+          name: "Spider-Man 2",
+          background_image: "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=800&auto=format&fit=crop",
+          rating: 4.9,
+          released: "2023-10-20",
+          genres: ["Action", "Adventure"],
+          platforms: ["PS5"]
+        },
+        {
+          id: 5,
+          name: "Forza Horizon 5",
+          background_image: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=800&auto=format&fit=crop",
+          rating: 4.6,
+          released: "2021-11-09",
+          genres: ["Racing", "Sports"],
+          platforms: ["PC", "Xbox"]
+        }
+      ];
+      setGames(fallbackGames);
+      setError('Using offline data - backend unavailable');
     };
 
     fetchTrendingGames();
-  }, [API_URL]);
+  }, []);
 
-  // Infinite sliding effect
+  // FIXED: Infinite sliding effect with null check
   useEffect(() => {
-    if (games.length === 0 || loading) return;
+    if (games.length === 0 || loading || !sliderRef.current) return;
 
     const slider = sliderRef.current;
     let animationId;
     let position = 0;
-    const speed = 2; // pixels per frame
+    const speed = 1; // Slower speed for better visibility
 
     const animate = () => {
       position -= speed;
@@ -83,10 +124,15 @@ const TrendingGames = () => {
       animationId = requestAnimationFrame(animate);
     };
 
-    animate();
+    // Start animation only if slider exists
+    if (slider) {
+      animate();
+    }
 
     return () => {
-      cancelAnimationFrame(animationId);
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
     };
   }, [games, loading]);
 
@@ -103,25 +149,15 @@ const TrendingGames = () => {
     );
   }
 
-  if (error) {
-    return (
-      <section className="py-16 bg-gradient-to-b from-[#0d1117] to-[#1a1f2d]">
-        <div className="container mx-auto px-4">
-          <div className="text-center text-red-400">
-            <p>Error: {error}</p>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   return (
     <section className="py-16 bg-gradient-to-b from-[#0d1117] to-[#1a1f2d] overflow-hidden">
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className=" text-center mb-12">
+        <div className="text-center mb-12">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#475BFD]/20 border border-[#475BFD]/40 mb-4">
-            <span ref={badgeRef} className="scroll-reveal from-bottom text-sm font-bold text-[#475BFD]">🔥 TRENDING NOW</span>
+            <span ref={badgeRef} className="scroll-reveal from-bottom text-sm font-bold text-[#475BFD]">
+              🔥 TRENDING NOW
+            </span>
           </div>
           <h2 ref={titleRef} className="scroll-reveal from-bottom text-3xl md:text-4xl font-bold text-white mb-4">
             Hot Games Right Now
@@ -129,6 +165,12 @@ const TrendingGames = () => {
           <p ref={subtitleRef} className="scroll-reveal from-bottom text-gray-400 max-w-2xl mx-auto">
             Discover what everyone is playing this week
           </p>
+          
+          {error && (
+            <div className="mt-4 px-4 py-2 bg-yellow-500/20 border border-yellow-500/40 rounded-lg inline-block">
+              <p className="text-yellow-400 text-sm">{error}</p>
+            </div>
+          )}
         </div>
 
         {/* Infinite Sliding Container */}
@@ -148,10 +190,13 @@ const TrendingGames = () => {
                   {/* Game Image */}
                   <div className="relative h-48 overflow-hidden">
                     <img
-                      src={game.background_image || 'https://via.placeholder.com/400x300/1a1f2d/475BFD?text=Game+Image'}
+                      src={game.background_image}
                       alt={game.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       loading="lazy"
+                      onError={(e) => {
+                        e.target.src = 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&auto=format&fit=crop';
+                      }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
                     
@@ -159,7 +204,9 @@ const TrendingGames = () => {
                     <div className="absolute top-3 right-3 bg-black/80 backdrop-blur-sm px-3 py-1 rounded-full">
                       <div className="flex items-center">
                         <FontAwesomeIcon icon={faStar} className="h-3 w-3 text-yellow-500 mr-1" />
-                        <span className="text-white text-sm font-bold">{game.rating.toFixed(1)}</span>
+                        <span className="text-white text-sm font-bold">
+                          {typeof game.rating === 'number' ? game.rating.toFixed(1) : '4.5'}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -187,15 +234,16 @@ const TrendingGames = () => {
                       <div className="flex items-center text-gray-400">
                         <FontAwesomeIcon icon={faCalendar} className="h-4 w-4 mr-2" />
                         <span className="text-sm">
-                          {new Date(game.released).getFullYear() || 'Coming Soon'}
+                          {game.released ? new Date(game.released).getFullYear() : 'Coming Soon'}
                         </span>
                       </div>
                       
                       <div className="flex items-center text-gray-400">
                         <FontAwesomeIcon icon={faGamepad} className="h-4 w-4 mr-2" />
                         <span className="text-sm truncate">
-                          {game.platforms?.slice(0, 2).join(', ')}
-                          {game.platforms?.length > 2 ? '...' : ''}
+                          {Array.isArray(game.platforms) 
+                            ? game.platforms.slice(0, 2).join(', ') + (game.platforms.length > 2 ? '...' : '')
+                            : 'Multi-platform'}
                         </span>
                       </div>
                     </div>
