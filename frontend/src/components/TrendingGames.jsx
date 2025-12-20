@@ -106,9 +106,9 @@ const TrendingGames = () => {
         {/* Section Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#475BFD]/20 border border-[#475BFD]/40 mb-4">
-            <span ref={titleRef} className="scroll-reveal text-sm font-bold text-[#475BFD]">TRENDING NOW</span>
+            <span ref={titleRef} className="scroll-reveal from-bottom slow-dramatic text-sm font-bold text-[#475BFD]">TRENDING NOW</span>
           </div>
-          <h2 ref={titleDesRef} className="scroll-reveal text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 ref={titleDesRef} className="scroll-reveal from-bottom slow-dramatic text-3xl md:text-4xl font-bold text-white mb-4">
             Hot Games Right Now
           </h2>
           <p ref={rightRef} className="scroll-reveal text-gray-400 max-w-2xl mx-auto">

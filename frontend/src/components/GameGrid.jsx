@@ -12,11 +12,11 @@ const AboutPage = () => {
       <div className="container mx-auto px-4 md:px-14">
         <div className="text-center mb-16">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
-            <span ref={titleRef} className="scroll-reveal bg-clip-text text-transparent bg-gradient-to-r from-[#475BFD] to-purple-600">
+            <span ref={titleRef} className="scroll-reveal from-bottom slow-dramatic bg-clip-text text-transparent bg-gradient-to-r from-[#475BFD] to-purple-600">
                 Play Axis
             </span>
           </h1>
-          <p ref={titleDesRef} className="scroll-reveal text-gray-400 text-md max-w-2xl mx-auto">
+          <p ref={titleDesRef} className="scroll-reveal from-bottom slow-dramatic text-gray-400 text-md max-w-2xl mx-auto">
             Your ultimate destination for game discovery and tracking
           </p>
         </div>
@@ -25,7 +25,7 @@ const AboutPage = () => {
           {/* Left Side */}
           <div 
             ref={leftRef}
-            className="scroll-reveal opacity-0 translate-y-10 transition-all duration-700 ease-out"
+            className="scroll-reveal from-bottom slow-dramatic opacity-0 translate-y-10 transition-all duration-700 ease-out"
           >
             <div className="bg-gradient-to-br from-gray-900/50 to-gray-900/30 rounded-2xl p-8 border border-gray-800 hover:border-[#475BFD]/30 transition-colors duration-300">
               <h2 className="text-3xl font-bold text-white mb-6">Our Story</h2>
@@ -41,7 +41,7 @@ const AboutPage = () => {
           {/* Right Side */}
           <div 
             ref={rightRef}
-            className="scroll-reveal opacity-0 translate-y-10 transition-all duration-700 ease-out delay-300"
+            className="scroll-reveal from-bottom slow-dramatic opacity-0 translate-y-10 transition-all duration-700 ease-out delay-300"
           >
             <div className="bg-gradient-to-br from-gray-900/50 to-gray-900/30 rounded-2xl p-8 border border-gray-800 hover:border-purple-600/30 transition-colors duration-300">
               <h2 className="text-3xl font-bold text-white mb-6">Our Values</h2>

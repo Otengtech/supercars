@@ -226,7 +226,6 @@ img {
     transform: translateY(0);
   }
 }
-
 /* === BASE ANIMATION CLASSES === */
 /* Apply to any element you want to animate */
 .scroll-reveal {
@@ -238,15 +237,15 @@ img {
 
 /* Direction modifiers - start positions */
 .scroll-reveal.from-left {
-  transform: translateX(-40px);
+  transform: translateX(-60px); /* Increased from 40px */
 }
 
 .scroll-reveal.from-right {
-  transform: translateX(40px);
+  transform: translateX(60px); /* Increased from 40px */
 }
 
 .scroll-reveal.from-bottom {
-  transform: translateY(40px);
+  transform: translateY(60px); /* Increased from 40px */
 }
 
 .scroll-reveal.fade-only {
@@ -254,18 +253,18 @@ img {
   transform: none;
 }
 
-/* Active state when visible */
+/* Active state when visible - SLOWER ANIMATIONS */
 .scroll-reveal.visible {
   opacity: 1;
   transform: translateX(0) translateY(0);
-  transition: opacity 0.6s ease-out, 
-              transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+  transition: opacity 1s ease-out, /* Increased from 0.6s */
+              transform 1.2s cubic-bezier(0.19, 1, 0.22, 1); /* Softer curve */
 }
 
 /* === MAP ELEMENTS OPTIMIZATION === */
-/* For smooth .map() animations */
+/* For smooth .map() animations - LONGER DELAYS */
 .stagger-container .scroll-reveal {
-  transition-delay: calc(var(--stagger-index, 0) * 0.1s);
+  transition-delay: calc(var(--stagger-index, 0) * 0.15s); /* Increased from 0.1s */
 }
 
 /* Prevent animation conflicts */
@@ -277,7 +276,7 @@ img {
 /* Reduce motion */
 @media (prefers-reduced-motion: reduce) {
   .scroll-reveal {
-    transition: opacity 0.3s ease-out !important;
+    transition: opacity 0.6s ease-out !important; /* Increased from 0.3s */
     transform: none !important;
   }
 }
@@ -286,15 +285,35 @@ img {
 @media (max-width: 768px) {
   .scroll-reveal.from-left,
   .scroll-reveal.from-right {
-    transform: translateX(-20px);
+    transform: translateX(-40px); /* Increased from 20px */
   }
   
   .scroll-reveal.from-bottom {
-    transform: translateY(20px);
+    transform: translateY(40px); /* Increased from 20px */
+  }
+  
+  /* Slower on mobile for better UX */
+  .scroll-reveal.visible {
+    transition: opacity 1.2s ease-out,
+                transform 1.4s cubic-bezier(0.19, 1, 0.22, 1);
   }
 }
 
-/* Faster animations for frequently scrolled areas */
-.scroll-reveal.fast {
-  transition-duration: 0.4s, 0.5s !important;
+/* === ANIMATION PRESETS === */
+/* Slow & dramatic */
+.scroll-reveal.slow-dramatic {
+  transition: opacity 1.4s ease-out,
+              transform 1.8s cubic-bezier(0.19, 1, 0.22, 1) !important;
+}
+
+/* Smooth fade */
+.scroll-reveal.smooth-fade {
+  transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Section entrance (for whole sections) */
+.scroll-reveal.section-entrance {
+  transform: translateY(80px);
+  transition: opacity 1.2s ease-out,
+              transform 1.6s cubic-bezier(0.175, 0.885, 0.32, 1.1);
 }
