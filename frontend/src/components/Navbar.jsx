@@ -174,12 +174,12 @@ const Navbar = () => {
               </button>
 
               {/* Notifications */}
-              <button className="relative">
+              <Link to="/notifications" className="relative">
                 <FontAwesomeIcon icon={faBell} className="h-5 w-5" />
                 <span className="absolute -top-1 -right-1 bg-[#475BFD] text-xs rounded-full h-4 w-4 flex items-center justify-center">
                   3
                 </span>
-              </button>
+              </Link>
             </div>
           </div>
 
